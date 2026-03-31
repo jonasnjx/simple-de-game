@@ -672,6 +672,12 @@ h1 {
   margin-top: 0.35rem;
 }
 
+.success-food {
+  font-weight: 600;
+  color: #36546b;
+  margin-top: 0.25rem;
+}
+
 .build-area {
   border: 1px dashed #cfe2f2;
   background: #f8fcff;
