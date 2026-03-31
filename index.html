@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Villagers!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-intro">
+        <h1>Save the Villagers!</h1>
+        <p class="subtitle">Learn core data engineering concepts through this simple game. <span class="subtitle-water" aria-hidden="true">💧</span></p>
+      </div>
+      <div class="top-actions">
+        <div class="score-box" aria-live="polite">
+          <span class="score-label">Points</span>
+          <span id="scoreValue" class="score-value">0</span>
+        </div>
+        <button id="restartBtn" class="btn btn-secondary" type="button">Restart Game</button>
+      </div>
+    </header>
+
+    <section class="progress-wrap" aria-label="Game progress">
+      <div class="progress-steps progress-steps--two">
+        <span id="stepDay1" class="step active">Day 1</span>
+        <span class="step-divider" aria-hidden="true"></span>
+        <span id="stepDay2" class="step">Day 2</span>
+      </div>
+      <div class="progress-bar" aria-hidden="true">
+        <span id="progressFill"></span>
+      </div>
+    </section>
+
+    <section id="gamePanel" class="panel">
+      <div class="panel-head">
+        <div class="panel-head-text">
+          <h2 id="stageTitle">Day 1 — Basic Water System</h2>
+          <p id="stageHint">Click components in the correct order to deliver water to the villagers.</p>
+        </div>
+        <div class="panel-hint-with-tip">
+          <button type="button" class="panel-hint-btn" id="stage1HintBtn" aria-describedby="stage1HintTip" aria-label="Hint">
+            <span class="panel-hint-icon" aria-hidden="true">💡</span>
+            <span class="panel-hint-label">Hint</span>
+          </button>
+          <span id="stage1HintTip" class="card-tip panel-hint-tip" role="tooltip">Click to arrange the icons in the correct order.</span>
+        </div>
+      </div>
+
+      <div id="stage1Feedback" class="feedback" role="status" aria-live="polite"></div>
+      <section class="build-area" aria-label="Your current water system">
+        <p class="build-title">Your current water system:</p>
+        <div id="buildScene" class="build-scene">
+          <span id="build-source" class="build-piece">① Raw water source</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="build-pipe" class="build-piece">② Water hose</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="build-bucket" class="build-piece">③ Water buckets</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="build-plant" class="build-piece">④ Water treatment plant</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="build-villagers" class="build-piece">⑤ Villagers</span>
+        </div>
+      </section>
+      <div id="cardsContainer" class="cards-grid" aria-live="polite"></div>
+
+      <div id="day1CelebrationOverlay" class="overlay hidden" aria-live="polite">
+        <div class="overlay-card">
+          <h3 class="story-heading story-heading--done">
+            <span class="green-tick" aria-hidden="true">✓</span>
+            Day 1 completed.
+          </h3>
+          <p>The villagers are drinking lots of clean water and are very happy. <span class="story-emoji" aria-hidden="true">😊</span></p>
+          <button id="day1CelebrationContinueBtn" class="btn btn-primary" type="button">Continue</button>
+        </div>
+      </div>
+
+      <div id="day2CrisisOverlay" class="overlay hidden" aria-live="polite">
+        <div class="overlay-card overlay-card--night">
+          <p class="crisis-lead">
+            <span class="fear-sign" aria-hidden="true" title="Warning">⚠️</span>
+            <span class="crisis-title">SUDDEN SYSTEM OUTAGE</span>
+            <span class="fear-face" aria-hidden="true">😱</span>
+          </p>
+          <p class="crisis-story">
+            When the villagers woke up the next day, they realised the water system had been damaged and were frantically trying to resolve the issue.
+          </p>
+          <p class="crisis-call">Please fix and improve the system to save them.</p>
+          <button id="day2CrisisContinueBtn" class="btn btn-primary" type="button">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="stage2Panel" class="panel hidden">
+      <div class="panel-head">
+        <div class="panel-head-text">
+          <h2>Day 2 — Enhanced water system</h2>
+          <p>Click each part in the correct order to fix the flow and save the village.</p>
+        </div>
+        <div class="panel-hint-with-tip">
+          <button type="button" class="panel-hint-btn" id="stage2HintBtn" aria-describedby="stage2HintTip" aria-label="Hint">
+            <span class="panel-hint-icon" aria-hidden="true">💡</span>
+            <span class="panel-hint-label">Hint</span>
+          </button>
+          <span id="stage2HintTip" class="card-tip panel-hint-tip" role="tooltip">Click to arrange the icons in the correct order.</span>
+        </div>
+      </div>
+
+      <div id="stage2Feedback" class="feedback" role="status" aria-live="polite"></div>
+      <section class="build-area" aria-label="Day 2 system build">
+        <p class="build-title">Your enhanced water system:</p>
+        <div id="day2BuildScene" class="build-scene">
+          <span id="d2-build-source" class="build-piece">① Raw water source</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-agreement" class="build-piece">② Water agreement</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-hose" class="build-piece">③ Water hose</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-cameras" class="build-piece">④ Hose cameras</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-buckets" class="build-piece">⑤ Water buckets</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-manager" class="build-piece">⑥ Water manager</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-plant" class="build-piece">⑦ Treatment plant</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-surveillance" class="build-piece">⑧ Plant surveillance</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-villagers" class="build-piece">⑨ Villagers</span>
+          <span class="build-arrow" aria-hidden="true">→</span>
+          <span id="d2-build-feedback-channel" class="build-piece">⑩ Feedback channel</span>
+        </div>
+      </section>
+      <div id="stage2Cards" class="cards-grid cards-grid--stage2"></div>
+    </section>
+
+    <section id="successPanel" class="panel hidden success-panel" aria-live="polite">
+      <h2 class="success-heading">Success! <span class="success-emoji" aria-hidden="true">🎉</span></h2>
+      <p>The system is now reliable and will keep running for the next 3,000 years. Villagers enjoy clean water and are very happy.</p>
+      <p class="success-thanks">Thank you for saving the villagers! <span class="success-emoji" aria-hidden="true">🥳</span></p>
+      <button class="btn btn-primary" id="playAgainBtn" type="button">Play Again</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
